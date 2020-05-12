@@ -1,0 +1,122 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "商工行政資料開放平臺 data.gcis.nat.gov.tw",
+    "description": "<div class=\"info_description markdown\">一、申請流程說明</div><p> 1.可於上排選單的「資料目錄」內點選 「公司登記介接」或「商業登記介接」查看，或下載經濟部商業司開放資料清單(僅含API)比對各項API，挑選出適合介接使用者之API項目。<br> 2.為確保平臺服務品質與維持系統效能，使用系統介接API之單位或個人請填寫使用告知書。<br> 3.填寫完告知書，請向計畫維運團隊遞件。聯絡信箱為：data.gcis@gmail.com。<br> 4.本平臺在收到告知信件確認資料無誤後(*註一)，會進行介接設定並發信通知告知者該介接設定已完成。<br>"
+  },
+  "host": "data.gcis.nat.gov.tw",
+  "basePath": "/od/data/api",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/426D5542-5F05-43EB-83F9-F1300F14E1F1": {
+      "get": {
+        "summary": "商業登記基本資料-應用三",
+        "operationId": "getBusinessInfo",
+        "parameters": [
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "description": "從第n筆開始條列。請填入阿拉伯數字，預設為0，下限為0，上限為500000。",
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "description": "每次可撈取筆數。請填入阿拉伯數字，預設為50，下限為1，上限為1000。",
+            "type": "string"
+          },
+          {
+            "name": "$format",
+            "in": "query",
+            "required": true,
+            "description": "指定來源格式",
+            "type": "string",
+            "enum": [
+              "json",
+              "xml"
+            ]
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": true,
+            "description": "過濾<br>公式:President_No eq [0-9]{8}<br>說明:President_No :商業登記之下的商業統一編號。",
+            "type": "string",
+            "pattern": "President_No eq [0-9]{8}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "資料來源:商業公示資料",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "President_No": {
+                    "type": "string"
+                  },
+                  "Business_Name": {
+                    "type": "string"
+                  },
+                  "Business_Current_Status": {
+                    "type": "string"
+                  },
+                  "Business_Current_Status_Desc": {
+                    "type": "string"
+                  },
+                  "Agency": {
+                    "type": "string"
+                  },
+                  "Agency_Desc": {
+                    "type": "string"
+                  },
+                  "Business_Address": {
+                    "type": "string"
+                  },
+                  "Business_Item_Old": {
+                    "type": "object"
+                  },
+                  "Business_Seq_NO": {
+                    "type": "string"
+                  },
+                  "Business_Item": {
+                    "type": "string"
+                  }
+                  ,
+                  "Business_Item_Desc": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": [
+                {
+                  "President_No": "15725713",
+                  "Business_Name": "鴻燿商品行",
+                  "Business_Current_Status": "01",
+                  "Business_Current_Status_Desc": "核准設立",
+                  "Agency": "376610000A",
+                  "Agency_Desc": "臺南市政府",
+                  "Business_Address": "臺南市安南區長安里公學路2段55號1樓",
+                  "Business_Item_Old": [
+                    {
+                      "Business_Seq_No": "1",
+                      "Business_Item": "F207030",
+                      "Business_Item_Desc": "清潔用品零售業"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  }
+}
